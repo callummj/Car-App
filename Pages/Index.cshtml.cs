@@ -14,6 +14,11 @@ namespace Car_App.Pages.Cars
     {
         private readonly Car_App.Data.Car_AppContext _context;
 
+        public string engineSort { get; set; }
+        public string makeSort { get; set; }
+        public string modelSort { get; set; }
+        public string colourSort { get; set; }
+
         public IndexModel(Car_App.Data.Car_AppContext context)
         {
             _context = context;
@@ -21,9 +26,46 @@ namespace Car_App.Pages.Cars
 
         public IList<Car> Car { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
-            Car = await _context.Car.ToListAsync();
+
+            // Sorting vars
+            engineSort = engineSort = sortOrder == "engine" ? "engineDesc" : "engine";
+            makeSort = String.IsNullOrEmpty(sortOrder) ? "make" : "";
+            modelSort = String.IsNullOrEmpty(sortOrder) ? "model" : "";
+            colourSort = String.IsNullOrEmpty(sortOrder) ? "colour" : "";
+
+            IQueryable<Car> cars = from c in _context.Car
+                                             select c;
+
+
+            switch(sortOrder)
+            {
+                
+                case "engine":
+                    cars = cars.OrderBy(s => s.engineSize).Reverse();
+                    break;
+                case "engineDesc":
+                    cars = cars.OrderBy(s => s.engineSize);
+                    break;
+
+                case "make":
+                    cars = cars.OrderBy(s => s.Make);
+                    break;
+                case "model":
+                    cars = cars.OrderBy(s => s.Model);
+                    break;
+                case "colour":
+                    cars = cars.OrderBy(s => s.Colour);
+                    break;
+                default:
+                    cars = cars.OrderBy(s => s.Make);
+                    break;
+                }
+
+           
+            Car = await cars.AsNoTracking().ToListAsync();
+
         }
     }
 }

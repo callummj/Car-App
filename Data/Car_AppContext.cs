@@ -15,5 +15,8 @@ namespace Car_App.Data
         }
 
         public DbSet<Car_App.Models.Car> Car { get; set; }
+
+        public string SortBy { get; set; }
+
     }
 }

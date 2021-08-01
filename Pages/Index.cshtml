@@ -7,32 +7,49 @@
 
 <h1>Cars</h1>
 
-<p>
-    <a asp-page="Create">Add a New Car</a>
-</p>
+<div id="create-btn-container">
+    <a class="btn btn-primary float-right" asp-page="Create">+</a>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Make)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.makeSort">
+                    @Html.DisplayNameFor(model => model.Car[0].Make)
+                </a>
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Model)
+
+                <a asp-page="./Index" asp-route-sortOrder="@Model.modelSort">
+                    @Html.DisplayNameFor(model => model.Car[0].Model)
+                </a>
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Colour)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.colourSort">
+                    @Html.DisplayNameFor(model => model.Car[0].Colour)
+                </a>
+               
             </th>
+            
             <th>
-                Engine Size
+                <a asp-page="./Index" asp-route-sortOrder="@Model.engineSort">
+                   Engine Size
+                </a>
+               
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody id="table-contents">
 @foreach (var item in Model.Car) {
-        <tr class="main-table-row">
+        <tr class="main-table-row" onclick="">
             <td>
-                @Html.DisplayFor(modelItem => item.Make)
+                <a class="car-link" asp-page="./Details" asp-route-id="@item.ID">
+                    @Html.DisplayFor(modelItem => item.Make)
+                </a>
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Model)
@@ -41,11 +58,11 @@
                 @Html.DisplayFor(modelItem => item.Colour)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.engineSize)
+                @Html.DisplayFor(modelItem => item.engineSize) cc
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a>
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
