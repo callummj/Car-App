@@ -23,14 +23,14 @@
                 @Html.DisplayNameFor(model => model.Car[0].Colour)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].engineSize)
+                Engine Size
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="table-contents">
 @foreach (var item in Model.Car) {
-        <tr>
+        <tr class="main-table-row">
             <td>
                 @Html.DisplayFor(modelItem => item.Make)
             </td>

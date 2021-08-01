@@ -11,6 +11,8 @@ namespace Car_App
 {
     public class Program
     {
+        // Limit records to 10 (As part of the spec)
+        public static bool limitRecords = true;
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Car_App.Data;
 using Car_App.Models;
 
+
 namespace Car_App.Pages.Cars
 {
     public class CreateModel : PageModel
@@ -35,6 +36,7 @@ namespace Car_App.Pages.Cars
                 return Page();
             }
 
+          
             _context.Car.Add(Car);
             await _context.SaveChangesAsync();
 
